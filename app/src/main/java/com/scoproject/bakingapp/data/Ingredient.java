@@ -11,16 +11,17 @@ import com.google.gson.annotations.SerializedName;
  * SCO Project
  */
 
-public class Ingredient implements Parcelable{
+public class Ingredient implements Parcelable {
 
     @SerializedName("quantity")
-    private Integer quantity;
+    private float quantity;
     @SerializedName("measure")
     private String measure;
     @SerializedName("ingredient")
     private String ingredient;
 
     protected Ingredient(Parcel in) {
+        quantity = in.readFloat();
         measure = in.readString();
         ingredient = in.readString();
     }
@@ -44,15 +45,16 @@ public class Ingredient implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeFloat(quantity);
         parcel.writeString(measure);
         parcel.writeString(ingredient);
     }
 
-    public Integer getQuantity() {
+    public float getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(float quantity) {
         this.quantity = quantity;
     }
 

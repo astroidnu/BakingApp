@@ -1,4 +1,6 @@
-package com.scoproject.bakingapp.ui.home;
+package com.scoproject.bakingapp.ui.fragment;
+
+import android.util.Log;
 
 import com.scoproject.bakingapp.data.Baking;
 import com.scoproject.bakingapp.repository.MainRepository;
@@ -8,7 +10,6 @@ import com.scoproject.bakingapp.vo.Resource;
 import java.util.List;
 
 import io.reactivex.annotations.NonNull;
-import timber.log.Timber;
 
 /**
  * Created by ibnumuzzakkir on 8/17/17.
@@ -16,13 +17,18 @@ import timber.log.Timber;
  * SCO Project
  */
 
-public class HomePresenter implements HomeContract.UserActionListener {
+public class ReceipePresenter implements ReceipeContract.UserActionListener {
     private MainRepository mMainRepository;
-    private HomeContract.View mView;
-    public HomePresenter(MainRepository mainRepository) {
+
+    private ReceipeContract.View mView;
+
+    public ReceipePresenter(MainRepository mainRepository) {
         mMainRepository = mainRepository;
     }
 
+    public void setView(ReceipeContract.View mView) {
+        this.mView = mView;
+    }
 
     @Override
     public void getBakingData() {
@@ -30,17 +36,13 @@ public class HomePresenter implements HomeContract.UserActionListener {
                 .subscribe(new CustomResourceSubscriber<Resource<List<Baking>>>() {
                     @Override
                     protected void onNextAndCompleted(@NonNull Resource<List<Baking>> body) {
-                        Timber.d(body.data.toString());
+                       mView.setReceipeAdapter(body.data);
                     }
 
                     @Override
                     protected void onError(String errorMessage) {
-                        Timber.e(errorMessage);
+                        Log.e(getClass().getName(), errorMessage);
                     }
                 });
-    }
-
-    public void setView(HomeContract.View view) {
-        mView = view;
     }
 }

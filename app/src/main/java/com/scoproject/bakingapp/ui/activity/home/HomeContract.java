@@ -1,4 +1,4 @@
-package com.scoproject.bakingapp.ui.home;
+package com.scoproject.bakingapp.ui.activity.home;
 
 /**
  * Created by ibnumuzzakkir on 8/17/17.
@@ -8,6 +8,8 @@ package com.scoproject.bakingapp.ui.home;
 
 public class HomeContract {
     public interface View{
+        void loadFragment(String fragmentId);
+        void setupFragment();
     }
     public interface UserActionListener{
         void getBakingData();

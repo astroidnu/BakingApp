@@ -11,10 +11,10 @@ import com.scoproject.bakingapp.vo.Resource;
 
 
 public class ApiWrapper {
-    public static <T> Resource<T> fetchApi(ApiResponse<BaseApiResponse<T>> response) {
+    public static <T> Resource<T> fetchApi(ApiResponse<T> response) {
         if (response.isSuccessful()) {
             if(response.body != null){
-                return Resource.success(response.body.results);
+                return Resource.success(response.body);
             }
         } else {
             return Resource.error(response.errorMessage, null);

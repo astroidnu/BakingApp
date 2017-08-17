@@ -15,5 +15,5 @@ import retrofit2.http.GET;
 
 public interface NetworkService {
     @GET("topher/2017/May/59121517_baking/baking.json")
-    Flowable<ApiResponse<BaseApiResponse<List<Baking>>>> getBakingData();
+    Flowable<ApiResponse<List<Baking>>> getBakingData();
 }

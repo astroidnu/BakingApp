@@ -2,8 +2,8 @@ package com.scoproject.bakingapp.di.component;
 
 import com.scoproject.bakingapp.di.module.AppModule;
 import com.scoproject.bakingapp.di.module.NetworkModule;
-import com.scoproject.bakingapp.ui.home.HomeComponent;
-import com.scoproject.bakingapp.ui.home.HomeModule;
+import com.scoproject.bakingapp.ui.activity.home.HomeComponent;
+import com.scoproject.bakingapp.ui.activity.home.HomeModule;
 
 import javax.inject.Singleton;
 

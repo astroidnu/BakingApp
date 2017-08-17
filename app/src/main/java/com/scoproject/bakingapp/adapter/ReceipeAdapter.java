@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.scoproject.bakingapp.R;
 import com.scoproject.bakingapp.data.Baking;
@@ -35,6 +36,7 @@ public class ReceipeAdapter extends RecyclerView.Adapter<ReceipeAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Baking baking = mBakingList.get(position);
+        holder.mTvReceipeName.setText(baking.getName());
     }
 
     @Override
@@ -43,8 +45,11 @@ public class ReceipeAdapter extends RecyclerView.Adapter<ReceipeAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        TextView mTvReceipeName;
+
         public ViewHolder(View itemView) {
             super(itemView);
+            mTvReceipeName = itemView.findViewById(R.id.tv_receipe_name);
         }
     }
 }
