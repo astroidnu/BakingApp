@@ -1,9 +1,11 @@
 package com.scoproject.bakingapp.adapter;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.scoproject.bakingapp.R;
 import com.scoproject.bakingapp.data.Step;
@@ -33,7 +35,8 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
+        Step step = mStepList.get(position);
+        holder.mStepName.setText(step.getDescription());
     }
 
     @Override
@@ -42,8 +45,11 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        TextView mStepName;
         public ViewHolder(View itemView) {
             super(itemView);
+            mStepName = itemView.findViewById(R.id.tv_step_name);
+
         }
     }
 }

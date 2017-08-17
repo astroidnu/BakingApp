@@ -1,5 +1,8 @@
 package com.scoproject.bakingapp.ui.activity.home;
 
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+
 /**
  * Created by ibnumuzzakkir on 8/17/17.
  * Android Engineer
@@ -8,11 +11,12 @@ package com.scoproject.bakingapp.ui.activity.home;
 
 public class HomeContract {
     public interface View{
-        void loadFragment(String fragmentId);
+        void loadFragment(String fragmentId, Bundle bundle, String title);
         void setupFragment();
+        void handleToolbar(Fragment fragment);
     }
     public interface UserActionListener{
-        void getBakingData();
+
     }
 }
 

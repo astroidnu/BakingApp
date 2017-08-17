@@ -21,8 +21,4 @@ public class HomePresenter implements HomeContract.UserActionListener {
     public void setView(HomeContract.View view) {
         mView = view;
     }
-
-    @Override
-    public void getBakingData() {
-    }
 }
