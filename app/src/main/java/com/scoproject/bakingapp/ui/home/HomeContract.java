@@ -10,6 +10,7 @@ public class HomeContract {
     public interface View{
     }
     public interface UserActionListener{
+        void getBakingData();
     }
 }
 

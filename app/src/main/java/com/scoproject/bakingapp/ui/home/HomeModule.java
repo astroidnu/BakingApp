@@ -1,6 +1,10 @@
 package com.scoproject.bakingapp.ui.home;
 
+import android.content.Context;
+
+import com.scoproject.bakingapp.api.NetworkService;
 import com.scoproject.bakingapp.di.scope.ActivityScope;
+import com.scoproject.bakingapp.repository.MainRepository;
 
 import dagger.Module;
 import dagger.Provides;
@@ -24,4 +28,15 @@ public class HomeModule {
         return homeActivity;
     }
 
+    @Provides
+    @ActivityScope
+    MainRepository provideMainRepository(NetworkService networkService) {
+        return new MainRepository(networkService);
+    }
+
+    @Provides
+    @ActivityScope
+    HomePresenter provideMainPresenter(MainRepository mainRepository,Context context) {
+        return new HomePresenter(mainRepository);
+    }
 }

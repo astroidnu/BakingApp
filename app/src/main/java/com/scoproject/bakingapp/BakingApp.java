@@ -7,6 +7,8 @@ import com.scoproject.bakingapp.di.component.DaggerAppComponent;
 import com.scoproject.bakingapp.di.module.AppModule;
 import com.scoproject.bakingapp.di.module.NetworkModule;
 
+import timber.log.Timber;
+
 /**
  * Created by ibnumuzzakkir on 8/17/17.
  * Android Engineer
@@ -26,6 +28,7 @@ public class BakingApp extends Application{
     public void onCreate() {
         super.onCreate();
         instance = this;
+        Timber.plant(new Timber.DebugTree());
     }
 
     protected AppComponent createAppComponent() {
