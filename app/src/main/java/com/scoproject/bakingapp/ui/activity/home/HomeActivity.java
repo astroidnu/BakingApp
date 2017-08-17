@@ -5,18 +5,15 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.FrameLayout;
 
 import com.scoproject.bakingapp.BakingApp;
 import com.scoproject.bakingapp.R;
-import com.scoproject.bakingapp.ui.fragment.ReceipeFragment;
+import com.scoproject.bakingapp.ui.fragment.receipe.ReceipeFragment;
 
 import java.util.HashMap;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 

@@ -1,11 +1,10 @@
 package com.scoproject.bakingapp.ui.activity.home;
 
-import android.content.Context;
-
 import com.scoproject.bakingapp.api.NetworkService;
 import com.scoproject.bakingapp.di.scope.ActivityScope;
 import com.scoproject.bakingapp.repository.MainRepository;
-import com.scoproject.bakingapp.ui.fragment.ReceipePresenter;
+import com.scoproject.bakingapp.ui.fragment.receipe.ReceipePresenter;
+import com.scoproject.bakingapp.ui.fragment.step.StepPresenter;
 
 import dagger.Module;
 import dagger.Provides;
@@ -46,5 +45,11 @@ public class HomeModule {
     @ActivityScope
     ReceipePresenter provideReceipePresenter(MainRepository mainRepository) {
         return new ReceipePresenter(mainRepository);
+    }
+
+    @Provides
+    @ActivityScope
+    StepPresenter provideStepPresenter() {
+        return new StepPresenter();
     }
 }

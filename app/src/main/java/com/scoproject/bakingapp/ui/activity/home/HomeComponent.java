@@ -1,7 +1,8 @@
 package com.scoproject.bakingapp.ui.activity.home;
 
 import com.scoproject.bakingapp.di.scope.ActivityScope;
-import com.scoproject.bakingapp.ui.fragment.ReceipeFragment;
+import com.scoproject.bakingapp.ui.fragment.receipe.ReceipeFragment;
+import com.scoproject.bakingapp.ui.fragment.step.StepFragment;
 
 import dagger.Subcomponent;
 
@@ -18,5 +19,6 @@ import dagger.Subcomponent;
 public interface HomeComponent {
     HomeActivity inject(HomeActivity mainActivity);
     ReceipeFragment inject(ReceipeFragment receipeFragment);
+    StepFragment inject(StepFragment stepFragment);
 }
 

@@ -1,4 +1,4 @@
-package com.scoproject.bakingapp.ui.fragment;
+package com.scoproject.bakingapp.ui.fragment.receipe;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -32,7 +32,7 @@ public class ReceipeFragment extends Fragment implements ReceipeContract.View {
     @Inject
     ReceipePresenter mReceipePresenter;
 
-    @BindView(R.id.rv_receipe)
+    @BindView(R.id.rv_master)
     RecyclerView mRvReceipe;
 
     private ReceipeContract.UserActionListener mActionListener;
@@ -41,7 +41,7 @@ public class ReceipeFragment extends Fragment implements ReceipeContract.View {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_receipe, container, false);
+        View view = inflater.inflate(R.layout.fragment_master_list, container, false);
         setupFragmentComponent();
         mActionListener = mReceipePresenter;
         mActionListener.getBakingData();

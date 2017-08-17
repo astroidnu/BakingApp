@@ -1,4 +1,4 @@
-package com.scoproject.bakingapp.ui.fragment;
+package com.scoproject.bakingapp.ui.fragment.receipe;
 
 import android.util.Log;
 
