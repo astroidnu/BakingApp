@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.scoproject.bakingapp.R;
 import com.scoproject.bakingapp.data.Baking;
+import com.scoproject.bakingapp.data.Ingredient;
 import com.scoproject.bakingapp.data.Step;
 import com.scoproject.bakingapp.ui.activity.home.HomeActivity;
 
@@ -51,9 +52,12 @@ public class ReceipeAdapter extends RecyclerView.Adapter<ReceipeAdapter.ViewHold
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
+                ArrayList<Ingredient> ingredientArrayList = new ArrayList<>();
                 ArrayList<Step> arrayList  = new ArrayList<>();
                 arrayList.addAll(baking.getSteps());
+                ingredientArrayList.addAll(baking.getIngredients());
                 bundle.putParcelableArrayList("step_data",  arrayList);
+                bundle.putParcelableArrayList("ingredient_data",  ingredientArrayList);
                 ((HomeActivity)mContext).loadFragment("stepFragment", bundle, baking.getName());
             }
         });

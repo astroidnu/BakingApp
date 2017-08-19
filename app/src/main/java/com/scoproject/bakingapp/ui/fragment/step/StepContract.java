@@ -1,5 +1,6 @@
 package com.scoproject.bakingapp.ui.fragment.step;
 
+import com.scoproject.bakingapp.data.Ingredient;
 import com.scoproject.bakingapp.data.Step;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
 
 public class StepContract {
     public interface View{
-        void setStepAdapter(List<Step> stepList);
+        void setStepAdapter(List<Step> stepList,List<Ingredient> ingredientList);
     }
 
     public interface UserActionListener{

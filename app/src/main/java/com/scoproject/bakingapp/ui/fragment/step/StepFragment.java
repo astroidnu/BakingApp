@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 import com.scoproject.bakingapp.BakingApp;
 import com.scoproject.bakingapp.R;
 import com.scoproject.bakingapp.adapter.StepAdapter;
+import com.scoproject.bakingapp.data.Ingredient;
 import com.scoproject.bakingapp.data.Step;
 import com.scoproject.bakingapp.ui.activity.home.HomeActivity;
 import com.scoproject.bakingapp.ui.activity.home.HomeModule;
@@ -51,8 +52,9 @@ public class StepFragment extends Fragment implements StepContract.View {
         mStepPresenter.setView(this);
         Bundle bundle = getArguments();
         if(bundle != null){
-            List<Step> data = bundle.getParcelableArrayList("step_data");
-            setStepAdapter(data);
+            List<Step> stepList = bundle.getParcelableArrayList("step_data");
+            List<Ingredient> ingredientList = bundle.getParcelableArrayList("ingredient_data");
+            setStepAdapter(stepList, ingredientList);
         }
         return view;
     }
@@ -65,9 +67,9 @@ public class StepFragment extends Fragment implements StepContract.View {
     }
 
     @Override
-    public void setStepAdapter(List<Step> stepList) {
+    public void setStepAdapter(List<Step> stepList, List<Ingredient> ingredientList) {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        mStepAdapter = new StepAdapter(stepList);
+        mStepAdapter = new StepAdapter(stepList, ingredientList);
         mRvStep.setLayoutManager(linearLayoutManager);
         mRvStep.setAdapter(mStepAdapter);
     }

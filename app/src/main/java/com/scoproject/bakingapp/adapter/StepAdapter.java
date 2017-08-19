@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.scoproject.bakingapp.R;
+import com.scoproject.bakingapp.data.Ingredient;
 import com.scoproject.bakingapp.data.Step;
 
 import java.util.List;
@@ -18,37 +19,76 @@ import java.util.List;
  * SCO Project
  */
 
-public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
+public class StepAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Step> mStepList;
+    private List<Ingredient> mIngredientList;
     private LayoutInflater mLayoutInflater;
 
-    public StepAdapter(List<Step> stepList){
+    public StepAdapter(List<Step> stepList, List<Ingredient> ingredientList){
         mStepList = stepList;
+        mIngredientList = ingredientList;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         mLayoutInflater = LayoutInflater.from(parent.getContext());
-        View itemView = mLayoutInflater.inflate(R.layout.item_step, parent, false);
-        return new ViewHolder(itemView);
+        View itemView = null;
+        switch (viewType){
+            case R.layout.item_ingredient:
+                itemView = mLayoutInflater.inflate(R.layout.item_ingredient, parent, false);
+                return new IngredientViewHolder(itemView);
+            case R.layout.item_step:
+                itemView = mLayoutInflater.inflate(R.layout.item_step, parent, false);
+                return new StepViewHolder(itemView);
+            default:
+                itemView = mLayoutInflater.inflate(R.layout.item_ingredient, parent, false);
+                return new IngredientViewHolder(itemView);
+        }
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        Step step = mStepList.get(position);
-        holder.mStepName.setText(step.getDescription());
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        switch (holder.getItemViewType()){
+            case R.layout.item_ingredient:
+                Ingredient ingredient = mIngredientList.get(position);
+                IngredientViewHolder ingredientViewHolder = (IngredientViewHolder) holder;
+                ingredientViewHolder.mIngredientName.setText(ingredient.getIngredient());
+                break;
+            case R.layout.item_step:
+                Step step = mStepList.get(position - mIngredientList.size());
+                StepViewHolder stepViewHolder = (StepViewHolder) holder;
+                stepViewHolder.mStepName.setText(step.getShortDescription());
+                break;
+        }
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        if(position < mIngredientList.size())
+            return R.layout.item_ingredient;
+        else
+            return R.layout.item_step;
+    }
     @Override
     public int getItemCount() {
-        return mStepList.size();
+        return mIngredientList.size() + mStepList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+
+    public class StepViewHolder extends RecyclerView.ViewHolder {
         TextView mStepName;
-        public ViewHolder(View itemView) {
+        public StepViewHolder(View itemView) {
             super(itemView);
             mStepName = itemView.findViewById(R.id.tv_step_name);
+
+        }
+    }
+
+    public class IngredientViewHolder extends RecyclerView.ViewHolder {
+        TextView mIngredientName;
+        public IngredientViewHolder(View itemView) {
+            super(itemView);
+            mIngredientName = itemView.findViewById(R.id.tv_ingredient_name);
 
         }
     }

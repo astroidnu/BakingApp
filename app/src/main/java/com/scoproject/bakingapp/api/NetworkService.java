@@ -14,6 +14,6 @@ import retrofit2.http.GET;
  */
 
 public interface NetworkService {
-    @GET("topher/2017/May/59121517_baking/baking.json")
+    @GET("android-baking-app-json")
     Flowable<ApiResponse<List<Baking>>> getBakingData();
 }
