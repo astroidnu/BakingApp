@@ -92,6 +92,9 @@ public class StepActivity extends AppCompatActivity implements StepContract.View
         if(bundle != null){
             currentFragment.setArguments(bundle);}
         getSupportActionBar().setTitle(title);
+        transaction.addToBackStack(null);
+        transaction.detach(currentFragment);
+        transaction.attach(currentFragment);
         transaction.replace(R.id.frame_detail, currentFragment, fragmentId);
         transaction.commit();
     }

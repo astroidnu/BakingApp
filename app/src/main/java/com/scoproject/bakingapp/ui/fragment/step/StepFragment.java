@@ -87,7 +87,9 @@ public class StepFragment extends Fragment implements StepFragmentContract.View,
     @Override
     public void onStepClicked(Step step) {
         if(mTwoPane){
-            ((StepActivity)getActivity()).loadDetailStepFragment("detailStepFragment",null,step.getShortDescription());
+             Bundle bundle = new Bundle();
+            bundle.putParcelable("data", step);
+            ((StepActivity)getActivity()).loadDetailStepFragment("detailStepFragment",bundle,step.getShortDescription());
         }else{
             Intent intent = new Intent(getContext(), DetailStepActivity.class);
             getContext().startActivity(intent);
