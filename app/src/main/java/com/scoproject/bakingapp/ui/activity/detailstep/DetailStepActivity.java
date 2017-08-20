@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.scoproject.bakingapp.BakingApp;
 import com.scoproject.bakingapp.R;
+import com.scoproject.bakingapp.data.Step;
 import com.scoproject.bakingapp.ui.activity.step.StepModule;
 import com.scoproject.bakingapp.ui.fragment.detailstep.DetailStepFragment;
 
@@ -22,6 +23,7 @@ import butterknife.ButterKnife;
 public class DetailStepActivity extends AppCompatActivity {
 
     private FragmentManager mFragmentManager;
+    private Step mStep= null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +32,11 @@ public class DetailStepActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setupActivityComponent();
         Bundle bundle = getIntent().getExtras();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Hello");
-        loadFragment(new Bundle());
         if(bundle != null){
-
+            mStep = bundle.getParcelable("data");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle(mStep.getShortDescription());
+            loadFragment(bundle);
         }
     }
 

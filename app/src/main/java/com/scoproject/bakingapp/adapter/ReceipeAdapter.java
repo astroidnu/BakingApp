@@ -56,12 +56,7 @@ public class ReceipeAdapter extends RecyclerView.Adapter<ReceipeAdapter.ViewHold
         if(!receipe.getImage().isEmpty()){
             Picasso.with(mContext).load(receipe.getImage()).placeholder(R.drawable.receipe_default_bg).into(holder.mImageReceipe);
         }else{
-            String url = receipe.getSteps().get(1).getThumbnailURL();
-            if(!url.isEmpty()){
-                holder.mImageReceipe.setImageBitmap(Helper.createVideoThumbnail(mContext, Uri.parse(url)));
-            }else{
-                Picasso.with(mContext).load(R.drawable.receipe_default_bg).into(holder.mImageReceipe);
-            }
+            Picasso.with(mContext).load(R.drawable.receipe_default_bg).into(holder.mImageReceipe);
         }
 
         holder.mCardViewReceipe.setOnClickListener(new View.OnClickListener() {

@@ -92,6 +92,7 @@ public class StepFragment extends Fragment implements StepFragmentContract.View,
             ((StepActivity)getActivity()).loadDetailStepFragment("detailStepFragment",bundle,step.getShortDescription());
         }else{
             Intent intent = new Intent(getContext(), DetailStepActivity.class);
+            intent.putExtra("data", step);
             getContext().startActivity(intent);
         }
 
