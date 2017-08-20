@@ -2,7 +2,7 @@ package com.scoproject.bakingapp.ui.fragment.receipe;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import com.scoproject.bakingapp.BakingApp;
 import com.scoproject.bakingapp.R;
 import com.scoproject.bakingapp.adapter.ReceipeAdapter;
-import com.scoproject.bakingapp.data.Baking;
+import com.scoproject.bakingapp.data.Receipe;
 import com.scoproject.bakingapp.ui.activity.home.HomeActivity;
 import com.scoproject.bakingapp.ui.activity.home.HomeModule;
 
@@ -41,7 +41,7 @@ public class ReceipeFragment extends Fragment implements ReceipeContract.View {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_master_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_receipe, container, false);
         setupFragmentComponent();
         mActionListener = mReceipePresenter;
         mActionListener.getBakingData();
@@ -58,10 +58,10 @@ public class ReceipeFragment extends Fragment implements ReceipeContract.View {
     }
 
     @Override
-    public void setReceipeAdapter(List<Baking> bakingList) {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        mReceipeAdapter = new ReceipeAdapter(bakingList);
-        mRvReceipe.setLayoutManager(linearLayoutManager);
+    public void setReceipeAdapter(List<Receipe> receipeList) {
+        int gridColumn = getResources().getInteger(R.integer.grid_column_number);
+        mReceipeAdapter = new ReceipeAdapter(receipeList);
+        mRvReceipe.setLayoutManager(new GridLayoutManager(getContext(), gridColumn));
         mRvReceipe.setAdapter(mReceipeAdapter);
     }
 }

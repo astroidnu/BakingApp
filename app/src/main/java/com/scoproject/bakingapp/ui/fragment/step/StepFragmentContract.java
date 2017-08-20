@@ -11,7 +11,7 @@ import java.util.List;
  * SCO Project
  */
 
-public class StepContract {
+public class StepFragmentContract {
     public interface View{
         void setStepAdapter(List<Step> stepList,List<Ingredient> ingredientList);
     }

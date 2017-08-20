@@ -1,6 +1,6 @@
 package com.scoproject.bakingapp.ui.fragment.receipe;
 
-import com.scoproject.bakingapp.data.Baking;
+import com.scoproject.bakingapp.data.Receipe;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ReceipeContract {
     public interface View{
-        void setReceipeAdapter(List<Baking> bakingList);
+        void setReceipeAdapter(List<Receipe> receipeList);
     }
     public interface UserActionListener{
         void getBakingData();

@@ -2,7 +2,7 @@ package com.scoproject.bakingapp.ui.fragment.receipe;
 
 import android.util.Log;
 
-import com.scoproject.bakingapp.data.Baking;
+import com.scoproject.bakingapp.data.Receipe;
 import com.scoproject.bakingapp.repository.MainRepository;
 import com.scoproject.bakingapp.utils.CustomResourceSubscriber;
 import com.scoproject.bakingapp.vo.Resource;
@@ -33,9 +33,9 @@ public class ReceipePresenter implements ReceipeContract.UserActionListener {
     @Override
     public void getBakingData() {
         mMainRepository.getBakingData()
-                .subscribe(new CustomResourceSubscriber<Resource<List<Baking>>>() {
+                .subscribe(new CustomResourceSubscriber<Resource<List<Receipe>>>() {
                     @Override
-                    protected void onNextAndCompleted(@NonNull Resource<List<Baking>> body) {
+                    protected void onNextAndCompleted(@NonNull Resource<List<Receipe>> body) {
                        mView.setReceipeAdapter(body.data);
                     }
 

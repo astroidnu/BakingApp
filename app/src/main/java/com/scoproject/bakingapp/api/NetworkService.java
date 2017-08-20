@@ -1,6 +1,6 @@
 package com.scoproject.bakingapp.api;
 
-import com.scoproject.bakingapp.data.Baking;
+import com.scoproject.bakingapp.data.Receipe;
 
 import java.util.List;
 
@@ -15,5 +15,5 @@ import retrofit2.http.GET;
 
 public interface NetworkService {
     @GET("android-baking-app-json")
-    Flowable<ApiResponse<List<Baking>>> getBakingData();
+    Flowable<ApiResponse<List<Receipe>>> getBakingData();
 }

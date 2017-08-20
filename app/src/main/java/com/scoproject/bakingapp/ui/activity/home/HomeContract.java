@@ -13,7 +13,6 @@ public class HomeContract {
     public interface View{
         void loadFragment(String fragmentId, Bundle bundle, String title);
         void setupFragment();
-        void handleToolbar(Fragment fragment);
     }
     public interface UserActionListener{
 

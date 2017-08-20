@@ -13,7 +13,7 @@ import java.util.List;
  * SCO Project
  */
 
-public class Baking implements Parcelable {
+public class Receipe implements Parcelable {
     @SerializedName("id")
     private Integer id;
     @SerializedName("name")
@@ -27,22 +27,22 @@ public class Baking implements Parcelable {
     @SerializedName("image")
     private String image;
 
-    protected Baking(Parcel in) {
+    protected Receipe(Parcel in) {
         name = in.readString();
         ingredients = in.createTypedArrayList(Ingredient.CREATOR);
         steps = in.createTypedArrayList(Step.CREATOR);
         image = in.readString();
     }
 
-    public static final Creator<Baking> CREATOR = new Creator<Baking>() {
+    public static final Creator<Receipe> CREATOR = new Creator<Receipe>() {
         @Override
-        public Baking createFromParcel(Parcel in) {
-            return new Baking(in);
+        public Receipe createFromParcel(Parcel in) {
+            return new Receipe(in);
         }
 
         @Override
-        public Baking[] newArray(int size) {
-            return new Baking[size];
+        public Receipe[] newArray(int size) {
+            return new Receipe[size];
         }
     };
 

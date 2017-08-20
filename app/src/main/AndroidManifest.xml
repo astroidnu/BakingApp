@@ -16,10 +16,16 @@
         <activity android:name=".ui.activity.home.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:parentActivityName=".ui.activity.home.HomeActivity"
+            android:label="Step Activity"
+            android:name=".ui.activity.step.StepActivity"/>
+        <activity
+            android:label="Step Activity"
+            android:name=".ui.activity.detailstep.DetailStepActivity"/>
     </application>
 
 </manifest>

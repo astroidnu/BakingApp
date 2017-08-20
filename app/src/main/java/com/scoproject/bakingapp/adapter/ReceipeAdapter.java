@@ -1,21 +1,25 @@
 package com.scoproject.bakingapp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.scoproject.bakingapp.R;
-import com.scoproject.bakingapp.data.Baking;
+import com.scoproject.bakingapp.data.Receipe;
 import com.scoproject.bakingapp.data.Ingredient;
 import com.scoproject.bakingapp.data.Step;
 import com.scoproject.bakingapp.ui.activity.home.HomeActivity;
+import com.scoproject.bakingapp.ui.activity.step.StepActivity;
+import com.scoproject.bakingapp.utils.Helper;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,12 +31,12 @@ import java.util.List;
  */
 
 public class ReceipeAdapter extends RecyclerView.Adapter<ReceipeAdapter.ViewHolder> {
-    private List<Baking> mBakingList;
+    private List<Receipe> mReceipeList;
     private LayoutInflater mLayoutInflater;
     private Context mContext;
 
-    public ReceipeAdapter(List<Baking> bakingList){
-        mBakingList = bakingList;
+    public ReceipeAdapter(List<Receipe> receipeList){
+        mReceipeList = receipeList;
         notifyDataSetChanged();
 
     }
@@ -46,35 +50,44 @@ public class ReceipeAdapter extends RecyclerView.Adapter<ReceipeAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Baking baking = mBakingList.get(position);
-        holder.mTvReceipeName.setText(baking.getName());
+
+        Receipe receipe = mReceipeList.get(position);
+        holder.mTvReceipeName.setText(receipe.getName());
+        if(!receipe.getImage().isEmpty()){
+            Picasso.with(mContext).load(receipe.getImage()).placeholder(R.drawable.receipe_default_bg).into(holder.mImageReceipe);
+        }else{
+            String url = receipe.getSteps().get(1).getThumbnailURL();
+            if(!url.isEmpty()){
+                holder.mImageReceipe.setImageBitmap(Helper.createVideoThumbnail(mContext, Uri.parse(url)));
+            }else{
+                Picasso.with(mContext).load(R.drawable.receipe_default_bg).into(holder.mImageReceipe);
+            }
+        }
+
         holder.mCardViewReceipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                ArrayList<Ingredient> ingredientArrayList = new ArrayList<>();
-                ArrayList<Step> arrayList  = new ArrayList<>();
-                arrayList.addAll(baking.getSteps());
-                ingredientArrayList.addAll(baking.getIngredients());
-                bundle.putParcelableArrayList("step_data",  arrayList);
-                bundle.putParcelableArrayList("ingredient_data",  ingredientArrayList);
-                ((HomeActivity)mContext).loadFragment("stepFragment", bundle, baking.getName());
+                Intent intent = new Intent(mContext, StepActivity.class);
+                intent.putExtra("receipeData",receipe);
+                mContext.startActivity(intent);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return mBakingList.size();
+        return mReceipeList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView mTvReceipeName;
         CardView mCardViewReceipe;
+        ImageView mImageReceipe;
 
         public ViewHolder(View itemView) {
             super(itemView);
             mCardViewReceipe = itemView.findViewById(R.id.card_receipe);
+            mImageReceipe = itemView.findViewById(R.id.image_receipe);
             mTvReceipeName = itemView.findViewById(R.id.tv_receipe_name);
         }
     }

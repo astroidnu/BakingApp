@@ -3,7 +3,7 @@ package com.scoproject.bakingapp.repository;
 
 import com.scoproject.bakingapp.api.ApiWrapper;
 import com.scoproject.bakingapp.api.NetworkService;
-import com.scoproject.bakingapp.data.Baking;
+import com.scoproject.bakingapp.data.Receipe;
 import com.scoproject.bakingapp.vo.Resource;
 
 import java.util.List;
@@ -24,10 +24,10 @@ public class MainRepository extends BaseRepository{
     }
 
     /**
-     * Get Baking Data
+     * Get Receipe Data
      **/
 
-    public Flowable<Resource<List<Baking>>> getBakingData() {
+    public Flowable<Resource<List<Receipe>>> getBakingData() {
         return networkService.getBakingData()
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())

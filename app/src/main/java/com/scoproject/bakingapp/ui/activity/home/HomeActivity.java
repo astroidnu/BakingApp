@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.scoproject.bakingapp.BakingApp;
 import com.scoproject.bakingapp.R;
+import com.scoproject.bakingapp.ui.fragment.detailstep.DetailStepFragment;
 import com.scoproject.bakingapp.ui.fragment.receipe.ReceipeFragment;
 import com.scoproject.bakingapp.ui.fragment.step.StepFragment;
 
@@ -33,7 +34,6 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
     private HomeContract.UserActionListener mActionListener;
     private ReceipeFragment mReceipeFragment;
     private StepFragment mStepFragment;
-    private final Handler mDrawerHandler = new Handler();
     private HashMap<String, Fragment> fragments;
     private Fragment currentFragment;
     private FragmentManager mFragmentManager;
@@ -47,7 +47,7 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
         mActionListener = mHomePresenter;
         mHomePresenter.setView(this);
         setupFragment();
-        loadFragment("receipeFragment", null,"Baking Time");
+        loadFragment("receipeFragment", null,"Receipe Time");
         Timber.tag(getClass().getName());
     }
 
@@ -61,39 +61,20 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
 
     @Override
     public void loadFragment(String fragmentId, Bundle bundle, String title) {
-        mDrawerHandler.removeCallbacksAndMessages(null);
-        mDrawerHandler.postDelayed(() -> {
-            mFragmentManager = getSupportFragmentManager();
-            FragmentTransaction transaction = mFragmentManager.beginTransaction();
-            if(!fragmentId.equals("receipeFragment")){
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            }
-            currentFragment = fragments.get(fragmentId);
-            currentFragment.setArguments(bundle);
-            getSupportActionBar().setTitle(title);
-            transaction.replace(R.id.frame_home, currentFragment, fragmentId);
-            transaction.addToBackStack(null);
-            transaction.commit();
-        },5);
-    }
-
-    @Override
-    public boolean onSupportNavigateUp(){
-        if(mFragmentManager.getBackStackEntryCount() > 1){
-            mFragmentManager.popBackStack();
-            handleToolbar(currentFragment);
-        } else{
-            finish();
+        mFragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = mFragmentManager.beginTransaction();
+        if(!fragmentId.equals("receipeFragment")){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        return true;
+        currentFragment = fragments.get(fragmentId);
+        if(bundle != null){
+            currentFragment.setArguments(bundle);
+        }
+        getSupportActionBar().setTitle(title);
+        transaction.replace(R.id.frame_home, currentFragment, fragmentId);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
-
-    @Override
-    public void onBackPressed(){
-        super.onBackPressed();
-        handleToolbar(currentFragment);
-    }
-
 
     @Override
     public void setupFragment() {
@@ -102,13 +83,5 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
         fragments = new HashMap<>();
         fragments.put("receipeFragment", mReceipeFragment);
         fragments.put("stepFragment", mStepFragment);
-    }
-
-    @Override
-    public void handleToolbar(Fragment fragment) {
-        if(fragment instanceof StepFragment){
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-            getSupportActionBar().setTitle("Baking Time");
-        }
     }
 }

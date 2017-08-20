@@ -4,6 +4,8 @@ import com.scoproject.bakingapp.di.module.AppModule;
 import com.scoproject.bakingapp.di.module.NetworkModule;
 import com.scoproject.bakingapp.ui.activity.home.HomeComponent;
 import com.scoproject.bakingapp.ui.activity.home.HomeModule;
+import com.scoproject.bakingapp.ui.activity.step.StepComponent;
+import com.scoproject.bakingapp.ui.activity.step.StepModule;
 
 import javax.inject.Singleton;
 
@@ -24,4 +26,5 @@ import dagger.Component;
 )
 public interface AppComponent {
     HomeComponent plus(HomeModule homeModule);
+    StepComponent plus(StepModule stepModule);
 }
